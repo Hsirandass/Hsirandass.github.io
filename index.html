@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harika Sirandass - VR/XR Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .featured-project {
+            border: 2px solid #667eea;
+            background: linear-gradient(135deg, #667eea10, #764ba210);
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .tech-tag {
+            background: #667eea;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .featured-badge {
+            background: #ff6b6b;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .skill-category h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-links a {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .contact-links a:hover {
+            background: #5a6fd8;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Harika Sirandass</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>VR/XR Developer & AI Researcher</h1>
+            <p class="subtitle">Creating immersive experiences with cutting-edge technology</p>
+            <a href="#projects" class="cta-button">View My Work</a>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="project-grid">
+                <div class="project-card featured-project">
+                    <div class="featured-badge">🏆 Published Research</div>
+                    <h3 class="project-title">Q-VMedSim: AI-Assisted VR Medical Training</h3>
+                    <p>Revolutionary VR medical simulation platform with AI guidance, achieving 84% knowledge retention vs 64% traditional methods. Built with Unity, C#, and GPT API integration.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Unity</span>
+                        <span class="tech-tag">C#</span>
+                        <span class="tech-tag">VR</span>
+                        <span class="tech-tag">AI/GPT</span>
+                        <span class="tech-tag">Blender</span>
+                        <span class="tech-tag">MongoDB</span>
+                    </div>
+                    <p><strong>📄 Published:</strong> IEEE World AI IoT Congress 2025</p>
+                    <p><strong>🏥 Partnership:</strong> Hartford HealthCare CESI</p>
+                    <p><strong>💰 Impact:</strong> Reduced training costs from $250K to $5K</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="demo-video.mp4" style="color: #667eea; text-decoration: none; margin-right: 1rem;">🎥 Watch VR Demo</a>
+                        <a href="ieee-paper.pdf" style="color: #667eea; text-decoration: none;">📄 Read IEEE Paper</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">Driver Drowsiness Detection AI</h3>
+                    <p>Published research on computer vision-based drowsiness detection system with real-time monitoring capabilities.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">OpenCV</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">TensorFlow</span>
+                        <span class="tech-tag">Computer Vision</span>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <a href="drowsiness-paper.pdf" style="color: #667eea; text-decoration: none;">📄 Read Research Paper</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">AI-Powered Drone Emergency Response</h3>
+                    <p>Autonomous drone platform for disaster response with real-time human recognition using YOLOv5 and edge computing optimization.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">YOLOv5</span>
+                        <span class="tech-tag">React.js</span>
+                        <span class="tech-tag">TensorRT</span>
+                        <span class="tech-tag">FastAPI</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">3D Visualization & VR Experiences</h3>
+                    <p>Created immersive VR property walkthroughs and photorealistic 3D models for real estate applications at Arka Group.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">3D Modeling</span>
+                        <span class="tech-tag">VR</span>
+                        <span class="tech-tag">Visualization</span>
+                        <span class="tech-tag">CAD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Technical Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>🥽 VR/XR Development</h3>
+                    <p>Unity, 3D Modeling, Blender, VR UI/UX Design, Spatial Computing, Immersive Experiences</p>
+                </div>
+                <div class="skill-category">
+                    <h3>🤖 AI & Machine Learning</h3>
+                    <p>TensorFlow, OpenCV, GPT API Integration, Computer Vision, YOLOv5, Neural Networks</p>
+                </div>
+                <div class="skill-category">
+                    <h3>💻 Programming Languages</h3>
+                    <p>C#, Python, Java, JavaScript, HTML/CSS, React, Node.js</p>
+                </div>
+                <div class="skill-category">
+                    <h3>☁️ Cloud & Databases</h3>
+                    <p>AWS, GCP, Azure, MongoDB, SQL, MySQL, RESTful APIs</p>
+                </div>
+                <div class="skill-category">
+                    <h3>🛠️ Development Tools</h3>
+                    <p>Git, Docker, Kubernetes, VS Code, Android Studio, Agile Methodologies</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 60px 0;">
+        <div class="container">
+            <div style="background: rgba(255,255,255,0.95); border-radius: 20px; padding: 3rem; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                <h2 style="color: #333; margin-bottom: 2rem; font-size: 2.5rem;">🎓 Academic Recognition</h2>
+                <div style="position: relative; max-width: 800px; margin: 0 auto;">
+                    <video id="gradVideo" width="100%" height="400" style="border-radius: 15px; cursor: pointer;" poster="grad-thumbnail.jpg">
+                        <source src="graduation-walk.MOV" type="video/quicktime">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div id="playButton" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255,107,107,0.9); border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s;">
+                        <span style="color: white; font-size: 2rem;">▶</span>
+                    </div>
+                    <div style="position: absolute; bottom: 20px; left: 20px; background: rgba(0,0,0,0.7); color: white; padding: 10px 20px; border-radius: 10px; font-weight: bold;">
+                        Recipient Academic Excellence Award CS 2025
+                    </div>
+                </div>
+                <p style="margin-top: 2rem; font-size: 1.2rem; color: #666;">
+                    <strong>Academic Excellence Award in Computer Science</strong><br>
+                    Recognized for outstanding performance and innovative research in VR/AI technologies
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Let's Connect</h2>
+            <div class="contact-info">
+                <p>Passionate about creating innovative VR/XR solutions and AI-driven applications. Always excited to collaborate on cutting-edge projects!</p>
+                <div class="contact-links">
+                    <a href="mailto:hsirandass@quinnipiac.edu">Email</a>
+                    <a href="https://linkedin.com/in/harikasirandass1" target="_blank">LinkedIn</a>
+                    <a href="https://github.com/Hsirandass" target="_blank">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Harika Sirandass. Crafted with passion for VR innovation.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Graduation video play functionality
+        const video = document.getElementById('gradVideo');
+        const playButton = document.getElementById('playButton');
+        
+        if (video && playButton) {
+            playButton.addEventListener('click', () => {
+                video.play();
+                playButton.style.display = 'none';
+            });
+            
+            video.addEventListener('click', () => {
+                if (video.paused) {
+                    video.play();
+                    playButton.style.display = 'none';
+                } else {
+                    video.pause();
+                    playButton.style.display = 'flex';
+                }
+            });
+            
+            video.addEventListener('ended', () => {
+                playButton.style.display = 'flex';
+            });
+        }
+    </script>
+</body>
+</html>
