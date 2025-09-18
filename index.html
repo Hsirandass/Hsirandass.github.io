@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harika Sirandass - VR/XR Developer</title>
+    <title>Harika Sirandass - AR/VR Specialist</title>
     <style>
         * {
             margin: 0;
@@ -11,59 +11,99 @@
             box-sizing: border-box;
         }
 
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
             color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #0a0a0a;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #f5576c);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            z-index: -1;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glass morphism container */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
+        /* Header */
         header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
             position: fixed;
-            width: 100%;
-            top: 0;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            padding: 15px 30px;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         nav {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 30px;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #667eea;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 25px;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: rgba(255, 255, 255, 0.9);
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            padding: 8px 16px;
+            border-radius: 20px;
         }
 
         .nav-links a:hover {
-            color: #667eea;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
         }
 
+        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -71,165 +111,404 @@
             justify-content: center;
             text-align: center;
             color: white;
-            padding-top: 80px;
+            position: relative;
         }
 
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             animation: fadeInUp 1s ease;
         }
 
-        .hero-content .subtitle {
-            font-size: 1.5rem;
+        .subtitle {
+            font-size: 1.3rem;
             margin-bottom: 2rem;
             opacity: 0.9;
             animation: fadeInUp 1s ease 0.2s both;
         }
 
-        .cta-button {
-            display: inline-block;
-            background: #ff6b6b;
-            color: white;
-            padding: 12px 30px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
             animation: fadeInUp 1s ease 0.4s both;
         }
 
-        .cta-button:hover {
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #f093fb;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
 
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Sections */
         .section {
-            padding: 80px 0;
-            background: white;
-        }
-
-        .section:nth-child(even) {
-            background: #f8f9fa;
+            padding: 100px 0;
+            position: relative;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 3rem;
+            font-weight: 800;
             margin-bottom: 3rem;
-            color: #333;
+            color: white;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .project-grid {
+        /* Research Highlight */
+        .research-highlight {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 3rem;
+            margin: 3rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-highlight::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(-45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(-45deg); }
+            100% { transform: translateX(100%) rotate(-45deg); }
+        }
+
+        .research-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .publication-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+            margin: 3rem 0;
         }
 
         .project-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 2px solid transparent;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
 
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-
-        .featured-project {
-            border: 2px solid #667eea;
-            background: linear-gradient(135deg, #667eea10, #764ba210);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
         }
 
         .project-title {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: white;
             margin-bottom: 1rem;
-            color: #333;
         }
 
-        .project-tech {
+        .project-description {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .tech-stack {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin: 1rem 0;
+            margin-bottom: 1.5rem;
         }
 
         .tech-tag {
-            background: #667eea;
+            background: rgba(255, 255, 255, 0.2);
             color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
+            padding: 6px 12px;
+            border-radius: 15px;
             font-size: 0.8rem;
+            font-weight: 500;
         }
 
-        .featured-badge {
-            background: #ff6b6b;
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-bottom: 1rem;
-            display: inline-block;
+        .project-metrics {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 1rem;
+            margin: 1rem 0;
         }
 
-        .skills-grid {
+        .metric {
+            color: #f093fb;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .project-link {
+            color: #f093fb;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid rgba(240, 147, 251, 0.3);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: rgba(240, 147, 251, 0.1);
+            border-color: #f093fb;
+        }
+
+        /* Skills Section */
+        .skills-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
+            margin: 3rem 0;
         }
 
         .skill-category {
-            background: white;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
             padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
         }
 
-        .skill-category h3 {
-            color: #667eea;
+        .skill-icon {
+            font-size: 2.5rem;
             margin-bottom: 1rem;
         }
 
-        .contact-info {
-            text-align: center;
-            max-width: 600px;
+        .skill-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .skill-list {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
             margin: 0 auto;
         }
 
-        .contact-links {
-            display: flex;
-            justify-content: center;
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            top: 15px;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .timeline-title {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-company {
+            color: #f093fb;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-date {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
+            margin: 3rem 0;
         }
 
-        .contact-links a {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            padding: 12px 24px;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: background 0.3s;
-        }
-
-        .contact-links a:hover {
-            background: #5a6fd8;
-        }
-
-        footer {
-            background: #333;
-            color: white;
+        .contact-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
             text-align: center;
-            padding: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
         }
 
+        .contact-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #f093fb;
+        }
+
+        .contact-title {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: #f093fb;
+        }
+
+        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -241,29 +520,66 @@
             }
         }
 
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 21px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0%;
             }
             
             .nav-links {
                 display: none;
             }
-            
-            .project-grid {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
 <body>
+    <div class="bg-animation"></div>
+    
+    <!-- Floating geometric elements -->
+    <div class="floating-element" style="top: 10%; left: 10%; font-size: 3rem;">⬡</div>
+    <div class="floating-element" style="top: 20%; right: 15%; font-size: 2rem; animation-delay: -2s;">◯</div>
+    <div class="floating-element" style="bottom: 30%; left: 20%; font-size: 2.5rem; animation-delay: -4s;">△</div>
+
     <header>
-        <nav class="container">
+        <nav>
             <div class="logo">Harika Sirandass</div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
+                <li><a href="#research">Research</a></li>
                 <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -271,207 +587,255 @@
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1> Virtual Reality(C#) Developer & AI Researcher</h1>
-            <p class="subtitle">Building scalable applications with modern technology</p>
-            <a href="#projects" class="cta-button">View My Work</a>
+            <h1>AR/VR Specialist & AI Researcher</h1>
+            <p class="subtitle">Building VR Applications & Bridging Creative Storytelling with Technical Innovation</p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">4+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Users Impacted</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">$2.3M</div>
+                    <div class="stat-label">Revenue Generated</div>
+                </div>
+            </div>
+            
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="mailto:hsirandass@quinnipiac.edu" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="research" class="section">
+        <div class="container">
+            <h2 class="section-title">Published Research</h2>
+            
+            <div class="research-highlight">
+                <div class="research-content">
+                    <div class="publication-badge">🏆 IEEE World AI IoT Congress 2025</div>
+                    <h3 style="color: white; font-size: 2rem; margin-bottom: 1rem;">Q-VMedSim: AI-Assisted Medical Training Platform</h3>
+                    <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; margin-bottom: 2rem;">
+                        Revolutionary medical training platform built with C# and Unity, achieving 84% knowledge retention vs 64% traditional methods. Features enterprise-grade architecture with AI integration and real-time analytics.
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 2rem 0;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; color: #f093fb; font-weight: 800;">84%</div>
+                            <div style="color: rgba(255, 255, 255, 0.8);">Knowledge Retention</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; color: #f093fb; font-weight: 800;">$245K</div>
+                            <div style="color: rgba(255, 255, 255, 0.8);">Cost Savings</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; color: #f093fb; font-weight: 800;">98%</div>
+                            <div style="color: rgba(255, 255, 255, 0.8);">User Adoption</div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 2rem;">
+                        <a href="ieee-paper.pdf" style="color: #f093fb; text-decoration: none; padding: 12px 24px; border: 2px solid #f093fb; border-radius: 25px; font-weight: 600; transition: all 0.3s ease;">📄 Read IEEE Paper</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="projects" class="section">
         <div class="container">
             <h2 class="section-title">Featured Projects</h2>
-            <div class="project-grid">
-                <div class="project-card featured-project">
-                    <div class="featured-badge">🏆 Published Research</div>
-                    <h3 class="project-title">Q-VMedSim: AI-Assisted Medical Training Platform</h3>
-                    <p>Revolutionary medical training platform built with <strong>C# and Unity</strong>, achieving 84% knowledge retention vs 64% traditional methods. Features enterprise-grade architecture with SQL database integration, REST API services, and real-time analytics.</p>
-                    <p><strong>Technical Architecture:</strong></p>
-                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem; font-size: 0.9rem;">
-                        <li>SQL Server database with stored procedures and triggers</li>
-                        <li>RESTful API integration with JSON data processing</li>
-                        <li>Real-time performance tracking and analytics dashboard</li>
-                        <li>Agile development methodology with iterative releases</li>
-                    </ul>
-                    <div class="project-tech">
-                        <span class="tech-tag">C# .NET</span>
+            
+            <div class="projects-grid">
+                <div class="project-card" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgdmlld0JveD0iMCAwIDQwMCAyNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjUwIiBmaWxsPSIjMjEyMTIxIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTI1IiBmb250LWZhbWlseT0iSW50ZXIiIGZvbnQtc2l6ZT0iMTgiIGZvbnQtd2VpZ2h0PSI2MDAiIGZpbGw9IiNmZmZmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5FTUcgVlIgUmVoYWJpbGl0YXRpb24gU3lzdGVtPC90ZXh0Pgo8L3N2Zz4='); background-size: cover; background-position: center;">
+                    <div class="project-title">EMG-Based VR Rehabilitation System</div>
+                    <div class="project-description">
+                        Biomedical VR system integrating Electromyography signals with immersive rehabilitation exercises for hemiplegia motor disorder treatment. Features real-time signal processing and adaptive therapy algorithms.
+                    </div>
+                    <div class="project-metrics">
+                        <div class="metric">✓ 95% EMG signal processing accuracy</div>
+                        <div class="metric">✓ <10ms real-time processing latency</div>
+                        <div class="metric">✓ Adaptive ML-based therapy algorithms</div>
+                    </div>
+                    <div class="tech-stack">
                         <span class="tech-tag">Unity</span>
-                        <span class="tech-tag">SQL Server</span>
-                        <span class="tech-tag">REST API</span>
-                        <span class="tech-tag">AI/GPT</span>
-                        <span class="tech-tag">MongoDB</span>
-                    </div>
-                    <p><strong>📄 Published:</strong> IEEE World AI IoT Congress 2025</p>
-                    <p><strong>🏥 Partnership:</strong> Hartford HealthCare CESI</p>
-                    <p><strong>💰 Impact:</strong> Reduced training costs from $250K to $5K</p>
-                    <div style="margin-top: 1rem;">
-                        <a href="demo-video.mp4" style="color: #667eea; text-decoration: none; margin-right: 1rem;">🎥 Watch Demo</a>
-                        <a href="ieee-paper.pdf" style="color: #667eea; text-decoration: none;">📄 Read IEEE Paper</a>
+                        <span class="tech-tag">C#</span>
+                        <span class="tech-tag">Biosignal Integration</span>
+                        <span class="tech-tag">Machine Learning</span>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <h3 class="project-title">Driver Drowsiness Detection AI</h3>
-                    <p>Published research on an AI-based driver drowsiness detection system built using <strong>C# .NET for Windows applications</strong> with computer vision capabilities. Features real-time monitoring with SQL Server data storage and non-invasive alert mechanisms.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">C# .NET</span>
-                        <span class="tech-tag">OpenCV</span>
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">SQL Server</span>
-                        <span class="tech-tag">Computer Vision</span>
+                <div class="project-card" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgdmlld0JveD0iMCAwIDQwMCAyNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjUwIiBmaWxsPSIjMWEyMzMzIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTI1IiBmb250LWZhbWlseT0iSW50ZXIiIGZvbnQtc2l6ZT0iMTgiIGZvbnQtd2VpZ2h0PSI2MDAiIGZpbGw9IiNmZmZmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5MdW5hciBTdXJmYWNlIFZSIFNpbXVsYXRpb248L3RleHQ+Cjwvc3ZnPg=='); background-size: cover; background-position: center;">
+                    <div class="project-title">Physics-Accurate Lunar VR Simulation</div>
+                    <div class="project-description">
+                        Immersive moon surface environment with scientifically accurate low-gravity physics using custom Hooke's Law implementations and innovative Gorilla Tag-style locomotion systems.
                     </div>
-                    <div style="margin-top: 1rem;">
-                        <a href="drowsiness-paper.pdf" style="color: #667eea; text-decoration: none;">📄 Read Research Paper</a>
+                    <div class="project-metrics">
+                        <div class="metric">✓ Photorealistic lunar surface rendering</div>
+                        <div class="metric">✓ Custom physics engine implementation</div>
+                        <div class="metric">✓ Advanced particle systems for debris effects</div>
                     </div>
-                </div>
-
-                <div class="project-card">
-                    <h3 class="project-title">AI-Powered Drone Emergency Response</h3>
-                    <p>Autonomous drone platform for disaster response with real-time human recognition. Developed <strong>scalable backend APIs using modern web service architectures</strong> and edge computing optimization with React.js mission control dashboard.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">C# .NET</span>
-                        <span class="tech-tag">REST API</span>
-                        <span class="tech-tag">React.js</span>
-                        <span class="tech-tag">YOLOv5</span>
-                        <span class="tech-tag">FastAPI</span>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Unity</span>
+                        <span class="tech-tag">Custom Physics Engine</span>
+                        <span class="tech-tag">Spatial Computing</span>
+                        <span class="tech-tag">C#</span>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <h3 class="project-title">Enterprise Application Development</h3>
-                    <p>Created scalable desktop and web applications using <strong>C# .NET Framework</strong> for 3D visualization and client demonstrations. Implemented comprehensive database solutions and responsive interfaces for enhanced user experiences.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">C# .NET</span>
-                        <span class="tech-tag">SQL Server</span>
-                        <span class="tech-tag">HTML/CSS/JS</span>
+                <div class="project-card" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgdmlld0JveD0iMCAwIDQwMCAyNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjUwIiBmaWxsPSIjMzMzNzMzIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTI1IiBmb250LWZhbWlseT0iSW50ZXIiIGZvbnQtc2l6ZT0iMTgiIGZvbnQtd2VpZ2h0PSI2MDAiIGZpbGw9IiNmZmZmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5WUiBQcm9wZXJ0eSBTaG93Y2FzZTwvdGV4dD4KPC9zdmc+'); background-size: cover; background-position: center;">
+                    <div class="project-title">VR Property Showcase Platform</div>
+                    <div class="project-description">
+                        End-to-end VR property visualization system for luxury residential projects, featuring real-time customization, photorealistic rendering, and immersive walkthroughs.
+                    </div>
+                    <div class="project-metrics">
+                        <div class="metric">✓ $2.3M in pre-construction sales generated</div>
+                        <div class="metric">✓ 80% improvement in client engagement</div>
+                        <div class="metric">✓ 50% reduction in revision cycles</div>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Unreal Engine</span>
+                        <span class="tech-tag">Ray Tracing</span>
+                        <span class="tech-tag">Spatial Audio</span>
                         <span class="tech-tag">3D Modeling</span>
-                        <span class="tech-tag">Database Design</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="skills" class="section">
+    <section class="section">
         <div class="container">
             <h2 class="section-title">Technical Expertise</h2>
-            <div class="skills-grid">
+            
+            <div class="skills-container">
                 <div class="skill-category">
-                    <h3>💻 Application Development</h3>
-                    <p>C# .NET Framework, ASP.NET, ADO.NET, Object-Oriented Programming, Visual Studio, SQL Server, Windows Applications</p>
+                    <div class="skill-icon">🥽</div>
+                    <div class="skill-title">AR/VR Development</div>
+                    <div class="skill-list">Unity 3D, Unreal Engine, WebXR, OpenXR, Oculus SDK, ARCore, ARKit, Mixed Reality Toolkit</div>
                 </div>
+                
                 <div class="skill-category">
-                    <h3>🔗 Web Technologies</h3>
-                    <p>REST APIs, HTML/CSS, JavaScript, JSON, AJAX, Web Services, Responsive Design</p>
+                    <div class="skill-icon">🤖</div>
+                    <div class="skill-title">AI Integration</div>
+                    <div class="skill-list">TensorFlow, PyTorch, Computer Vision, Machine Learning, AI-driven Content Generation</div>
                 </div>
+                
                 <div class="skill-category">
-                    <h3>🛠️ Development Tools</h3>
-                    <p>Git/Version Control, Visual Studio, Agile Methodologies, Database Design, Performance Optimization</p>
+                    <div class="skill-icon">🎨</div>
+                    <div class="skill-title">3D Development</div>
+                    <div class="skill-list">Blender, Maya, 3D Modeling, Spatial Audio, Interactive Animation, Real-time Rendering</div>
                 </div>
+                
                 <div class="skill-category">
-                    <h3>🗄️ Database & Cloud</h3>
-                    <p>SQL Server, MySQL, MongoDB, Stored Procedures, Triggers, AWS, GCP, Azure</p>
+                    <div class="skill-icon">💻</div>
+                    <div class="skill-title">Programming</div>
+                    <div class="skill-list">C#, Python, JavaScript, HLSL/GLSL Shaders, Node.js, React</div>
                 </div>
+                
                 <div class="skill-category">
-                    <h3>🤖 AI & Advanced Technologies</h3>
-                    <p>Machine Learning, TensorFlow, OpenCV, Unity Engine, Computer Vision, Neural Networks</p>
+                    <div class="skill-icon">🔗</div>
+                    <div class="skill-title">Systems Integration</div>
+                    <div class="skill-list">API Development, Pipeline Architecture, Cross-platform Compatibility, Performance Optimization</div>
                 </div>
+                
                 <div class="skill-category">
-                    <h3>🔧 Development Philosophy</h3>
-                    <p>Experienced in Agile environments with focus on scalable architecture, clean code principles, and cross-functional team collaboration</p>
+                    <div class="skill-icon">🎬</div>
+                    <div class="skill-title">Interactive Media</div>
+                    <div class="skill-list">Content Pipelines, Asset Integration, Storytelling, Creative-Technical Bridge</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 60px 0;">
+    <section id="experience" class="section">
         <div class="container">
-            <div style="background: rgba(255,255,255,0.95); border-radius: 20px; padding: 3rem; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
-                <h2 style="color: #333; margin-bottom: 2rem; font-size: 2.5rem;">🎓 Academic Recognition</h2>
-                <div style="position: relative; max-width: 800px; margin: 0 auto;">
-                    <video id="gradVideo" width="100%" height="400" style="border-radius: 15px; cursor: pointer;" poster="grad-thumbnail.jpg">
-                        <source src="graduation-walk.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <div id="playButton" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255,107,107,0.9); border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s;">
-                        <span style="color: white; font-size: 2rem;">▶</span>
-                    </div>
-                    <div style="position: absolute; bottom: 20px; left: 20px; background: rgba(0,0,0,0.7); color: white; padding: 10px 20px; border-radius: 10px; font-weight: bold;">
-                        Recipient Academic Excellence Award CS 2025
+            <h2 class="section-title">Professional Journey</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-title">Virtual Reality Developer</div>
+                        <div class="timeline-company">Hartford HealthCare (CESI)</div>
+                        <div class="timeline-date">Aug 2024 - Jun 2025</div>
+                        <div class="timeline-description">
+                            Architected Q-VMedSim, an AI-integrated VR medical training platform serving 500+ professionals across 12 hospitals, achieving 84% knowledge retention improvement.
+                        </div>
                     </div>
                 </div>
-                <p style="margin-top: 2rem; font-size: 1.2rem; color: #666;">
-                    <strong>Academic Excellence Award in Computer Science</strong><br>
-                    Recognized for outstanding performance and innovative research in VR/AI technologies
-                </p>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-title">VR Experience Specialist</div>
+                        <div class="timeline-company">Arka Group</div>
+                        <div class="timeline-date">Nov 2020 - Jun 2023</div>
+                        <div class="timeline-description">
+                            Led immersive property visualization for 15+ luxury projects, generating $2.3M in pre-construction sales through photorealistic VR experiences.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-title">Web AR Developer</div>
+                        <div class="timeline-company">Valuedge Solutions</div>
+                        <div class="timeline-date">Jan 2023 - Apr 2023</div>
+                        <div class="timeline-description">
+                            Developed WebXR applications reaching 10K+ users, integrating ML models for 90% spatial accuracy in browser-based AR experiences.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="contact" class="section">
         <div class="container">
-            <h2 class="section-title">Let's Connect</h2>
-            <div class="contact-info">
-                <p>Passionate about creating innovative VR/XR solutions and AI-driven applications. Always excited to collaborate on cutting-edge projects!</p>
-                <div class="contact-links">
-                    <a href="mailto:hsirandass@quinnipiac.edu">Email</a>
-                    <a href="https://linkedin.com/in/harikasirandass1" target="_blank">LinkedIn</a>
-                    <a href="https://github.com/Hsirandass" target="_blank">GitHub</a>
+            <h2 class="section-title">Let's Create Something Amazing</h2>
+            
+            <div style="text-align: center; max-width: 600px; margin: 0 auto 3rem;">
+                <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem;">
+                    Ready to push the boundaries of immersive technology? Let's connect and explore how we can bring innovative AR/VR solutions to life.
+                </p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-title">Email</div>
+                    <a href="mailto:hsirandass@quinnipiac.edu" class="contact-link">hsirandass@quinnipiac.edu</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">💼</div>
+                    <div class="contact-title">LinkedIn</div>
+                    <a href="https://linkedin.com/in/harikasirandass" target="_blank" class="contact-link">Connect with me</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">💻</div>
+                    <div class="contact-title">GitHub</div>
+                    <a href="https://github.com/Hsirandass" target="_blank" class="contact-link">View my code</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">📄</div>
+                    <div class="contact-title">Resume</div>
+                    <a href="resume.pdf" target="_blank" class="contact-link">Download PDF</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer>
+    <footer style="background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px); color: white; text-align: center; padding: 3rem 0; border-top: 1px solid rgba(255, 255, 255, 0.1);">
         <div class="container">
-            <p>&copy; 2025 Harika Sirandass. Crafted with passion for VR innovation.</p>
+            <p style="margin-bottom: 1rem; font-size: 1.1rem;">Harika Sirandass</p>
+            <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">AR/VR Specialist | AI Researcher | Building the Future of Immersive Technology</p>
+            <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.8rem; margin-top: 1rem;">&copy; 2025 Harika Sirandass. Crafted with passion for VR innovation.</p>
         </div>
     </footer>
-
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Add scroll effect to header
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-            }
-        });
-
-        // Graduation video play functionality
-        const video = document.getElementById('gradVideo');
-        const playButton = document.getElementById('playButton');
-        
-        if (video && playButton) {
-            playButton.addEventListener('click', () => {
-                video.play();
-                playButton.style.display = 'none';
-            });
-            
-            video.addEventListener('click', () => {
-                if (video.paused) {
-                    video.play();
-                    playButton.style.display = 'none';
-                } else {
-                    video.pause();
-                    playButton.style.display = 'flex';
-                }
-            });
-            
-            video.addEventListener('ended', () => {
-                playButton.style.display = 'flex';
-            });
-        }
-    </script>
-</body>
-</html>
