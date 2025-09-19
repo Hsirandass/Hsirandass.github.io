@@ -81,6 +81,7 @@
             font-size: 1.2rem;
             font-weight: 700;
             color: white;
+            white-space: nowrap;
         }
 
         .nav-links {
@@ -103,6 +104,11 @@
             color: white;
         }
 
+        .nav-links a.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -112,6 +118,7 @@
             text-align: center;
             color: white;
             position: relative;
+            padding-top: 80px;
         }
 
         .hero-content {
@@ -525,6 +532,17 @@
         }
 
         /* Responsive Design */
+        @media (max-width: 1024px) {
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .nav-links a {
+                font-size: 0.9rem;
+                padding: 6px 12px;
+            }
+        }
+
         @media (max-width: 768px) {
             .hero-stats {
                 grid-template-columns: 1fr;
@@ -557,9 +575,19 @@
             .timeline-item:nth-child(even) {
                 left: 0%;
             }
-            
+        }
+
+        @media (max-width: 480px) {
             .nav-links {
                 display: none;
+            }
+            
+            header {
+                padding: 10px 20px;
+            }
+            
+            .logo {
+                font-size: 1rem;
             }
         }
     </style>
@@ -645,6 +673,35 @@
                     </div>
                 </div>
             </div>
+
+            <div class="research-highlight" style="margin-top: 3rem;">
+                <div class="research-content">
+                    <div class="publication-badge">📄 Published Research</div>
+                    <h3 style="color: white; font-size: 2rem; margin-bottom: 1rem;">Driver Drowsiness Detection using AI</h3>
+                    <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; margin-bottom: 2rem;">
+                        AI-based driver drowsiness detection system using computer vision to monitor eye closure and yawning patterns. Features real-time monitoring with advantages over traditional EEG/ECG methods for accident prevention.
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 2rem 0;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; color: #f093fb; font-weight: 800;">Real-time</div>
+                            <div style="color: rgba(255, 255, 255, 0.8);">Monitoring</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; color: #f093fb; font-weight: 800;">Non-invasive</div>
+                            <div style="color: rgba(255, 255, 255, 0.8);">Detection</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; color: #f093fb; font-weight: 800;">Computer Vision</div>
+                            <div style="color: rgba(255, 255, 255, 0.8);">Based</div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 2rem;">
+                        <a href="drowsiness-paper.pdf" style="color: #f093fb; text-decoration: none; padding: 12px 24px; border: 2px solid #f093fb; border-radius: 25px; font-weight: 600; transition: all 0.3s ease;">📄 Read Research Paper</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -653,7 +710,7 @@
             <h2 class="section-title">Featured Projects</h2>
             
             <div class="projects-grid">
-                <div class="project-card" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/emg-project.png'); background-size: cover; background-position: center;">
+                <div class="project-card" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgdmlld0JveD0iMCAwIDQwMCAyNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjUwIiBmaWxsPSIjMjEyMTIxIi8+Cjwvc3ZnPg=='); background-size: cover; background-position: center;">
                     <div class="project-title">EMG-Based VR Rehabilitation System</div>
                     <div class="project-description">
                         Biomedical VR system integrating Electromyography signals with immersive rehabilitation exercises for hemiplegia motor disorder treatment. Features real-time signal processing and adaptive therapy algorithms.
@@ -671,7 +728,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/lunar-project.png'); background-size: cover; background-position: center;">
+                <div class="project-card" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgdmlld0JveD0iMCAwIDQwMCAyNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjUwIiBmaWxsPSIjMWEyMzMzIi8+Cjwvc3ZnPg=='); background-size: cover; background-position: center;">
                     <div class="project-title">Physics-Accurate Lunar VR Simulation</div>
                     <div class="project-description">
                         Immersive moon surface environment with scientifically accurate low-gravity physics using custom Hooke's Law implementations and innovative Gorilla Tag-style locomotion systems.
@@ -689,7 +746,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/property-project.webp'); background-size: cover; background-position: center;">
+                <div class="project-card" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgdmlld0JveD0iMCAwIDQwMCAyNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjUwIiBmaWxsPSIjMzMzNzMzIi8+Cjwvc3ZnPg=='); background-size: cover; background-position: center;">
                     <div class="project-title">VR Property Showcase Platform</div>
                     <div class="project-description">
                         End-to-end VR property visualization system for luxury residential projects, featuring real-time customization, photorealistic rendering, and immersive walkthroughs.
@@ -815,7 +872,7 @@
                 <div class="contact-card">
                     <div class="contact-icon">💼</div>
                     <div class="contact-title">LinkedIn</div>
-                    <a href="https://linkedin.com/in/harikasirandass" target="_blank" class="contact-link">Connect with me</a>
+                    <a href="https://linkedin.com/in/harikasirandass1" target="_blank" class="contact-link">Connect with me</a>
                 </div>
                 
                 <div class="contact-card">
